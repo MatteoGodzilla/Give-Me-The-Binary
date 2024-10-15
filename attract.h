@@ -1,11 +1,15 @@
-#include <stdbool.h>
-#include "state.h"
-#include <TimerOne.h>
+#ifndef ATTRACT_H
+#define ATTRACT_H
 
-#define LS 13
-#define B1 5
+#include <stdbool.h>
+#include <Arduino.h>
+#include <TimerOne.h>
+#include "state.h"
+#include "pins.h"
 
 void setupAttract();
 void loopAttract();
 bool isAttractActive();
 enum State getNextState();
+
+#endif
