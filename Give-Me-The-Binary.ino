@@ -61,19 +61,20 @@ void changeState() {
       if (!AttractNP::isActive()) {
         if (AttractNP::getNextState() == Game) {
           currentState = Game;
+          /*Missing call to GameNP::setup() ???*/
         } else if (AttractNP::getNextState() == Sleep) {
           currentState = Sleep;
-          SleepNP::isActive();
+          SleepNP::setup();
         }
       }
       break;
     case Game:
-      if (false/*Booleano di Game == false, Game::isActive()*/) {
+      if (GameNP::isActive()) {
         currentState = GameOver;
       }
       break;
     case GameOver:
-      if (false/*Booleano di GameOver == false, GameOver::isActive()*/) {
+      if (GameOverNP::isActive()) {
         currentState = Attract;
         AttractNP::setup();
       }
