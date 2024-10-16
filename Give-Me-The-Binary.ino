@@ -14,11 +14,6 @@ Authors: Carletti Lorenzo, Catena Matteo, Dall'Ara Lorenzo
 /* Hardware references header */
 #include "pins.h"
 
-using GameOverNP;
-using AttractNP;
-using SleepNP;
-using GameNP;
-
 enum State currentState;
 
 void setup() {
