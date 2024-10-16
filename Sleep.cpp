@@ -6,7 +6,7 @@ static bool active = false;
 
 static void wakeup(){}
 
-void setupSleep() {
+void SleepNP::setup() {
     Serial.println("[STATUS: Sleep]");
     Serial.flush();
     active = true;
@@ -23,6 +23,6 @@ void setupSleep() {
     active = false;
 }
 
-bool isSleepModeActive(){
+bool SleepNP::isActive(){
     return active;
 }

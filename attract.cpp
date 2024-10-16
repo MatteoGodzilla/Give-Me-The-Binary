@@ -19,7 +19,7 @@ void goSleep() {
   Serial.flush();
 }
 
-void setupAttract() {
+void AttractNP::setup() {
   active = true;
 
   Timer1.initialize(10 * 1000 * 1000);  //10 sec
@@ -31,7 +31,7 @@ void setupAttract() {
   Serial.println(cooldownStart);
 }
 
-void loopAttract() {
+void AttractNP::loopAction() {
   analogWrite(LS, currIntensity);
   currIntensity += fadeAmount;
   if (currIntensity == 0 || currIntensity == 255) {
@@ -46,10 +46,10 @@ void loopAttract() {
   delay(10);
 }
 
-bool isAttractActive() {
+bool AttractNP::isActive() {
   return active;
 }
 
-enum State getAttractNextState() {
+enum State AttractNP::getNextState() {
   return next;
 }
