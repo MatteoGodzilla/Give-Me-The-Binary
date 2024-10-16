@@ -1,5 +1,4 @@
-#ifndef STATE_H
-#define STATE_H
+#pragma once
 
 enum State {
   Attract,
@@ -7,5 +6,3 @@ enum State {
   GameOver,
   Sleep
 };
-
-#endif

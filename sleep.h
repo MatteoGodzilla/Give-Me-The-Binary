@@ -1,13 +1,11 @@
-#ifndef SLEEP_H
-#define SLEEP_H
-
+#pragma once
 #include <stdbool.h>
 #include <Arduino.h>
 #include <EnableInterrupt.h>
 #include "LowPower.h"
 #include "pins.h"
 
-void setupSleep();
-bool isSleepModeActive();
-
-#endif
+namespace SleepNP {
+  void setupSleep();
+  bool isSleepModeActive();
+}
