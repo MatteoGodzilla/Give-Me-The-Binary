@@ -6,8 +6,8 @@
 #include "pins.h"
 
 namespace AttractNP {
-  void setupAttract();
-  void loopAttract();
-  bool isAttractActive();
-  enum State getAttractNextState();
+  void setup();
+  void loopAction();
+  bool isActive();
+  enum State getNextState();
 }

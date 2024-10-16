@@ -6,6 +6,6 @@
 #include "pins.h"
 
 namespace SleepNP {
-  void setupSleep();
-  bool isSleepModeActive();
+  void setup();
+  bool isActive();
 }

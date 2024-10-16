@@ -34,14 +34,14 @@ void setup() {
   pinMode(B3, INPUT); // B3
   pinMode(B4, INPUT); // B4
   Serial.begin(9600);
-  setupAttract();
+  AttractNP::setup();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   switch (currentState) {
     case Attract:
-      Attract::loopAttract();
+      AttractNP::loopAction();
       break;
     case Game:
       /*start Game.c*/;
@@ -63,12 +63,12 @@ void loop() {
 void changeState() {
   switch (currentState) {
     case Attract:
-      if (!isAttractActive()) {
-        if (getAttractNextState() == Game) {
+      if (!AttractNP::isActive()) {
+        if (AttractNP::getNextState() == Game) {
           currentState = Game;
-        } else if (getAttractNextState() == Sleep) {
+        } else if (AttractNP::getNextState() == Sleep) {
           currentState = Sleep;
-          setupSleep();
+          SleepNP::isActive();
         }
       }
       break;
@@ -80,13 +80,13 @@ void changeState() {
     case GameOver:
       if (false/*Booleano di GameOver == false, GameOver::isActive()*/) {
         currentState = Attract;
-        setupAttract();
+        AttractNP::setup();
       }
       break;
     case Sleep:
-      if (!isSleepModeActive()) {
+      if (!SleepNP::isActive()) {
         currentState = Attract;
-        setupAttract();
+        AttractNP::setup();
       }
       break;
   }
