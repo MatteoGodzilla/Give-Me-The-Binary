@@ -14,6 +14,9 @@ void goSleep() {
   next = Sleep;
   Serial.println("Passato alla fase sleep");
   Timer1.detachInterrupt();
+
+  Serial.println(millis());
+  Serial.flush();
 }
 
 void setupAttract() {
@@ -24,10 +27,11 @@ void setupAttract() {
   Serial.println("[STATUS: Attract]");
 
   cooldownStart = millis();
+  
+  Serial.println(cooldownStart);
 }
 
 void loopAttract() {
-  Serial.print(".");
   analogWrite(LS, currIntensity);
   currIntensity += fadeAmount;
   if (currIntensity == 0 || currIntensity == 255) {
@@ -39,6 +43,7 @@ void loopAttract() {
     next = Game;
     Timer1.detachInterrupt();
   }
+  delay(10);
 }
 
 bool isAttractActive() {

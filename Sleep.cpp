@@ -10,7 +10,11 @@ void setupSleep() {
     Serial.println("[STATUS: Sleep]");
     Serial.flush();
     active = true;
+    digitalWrite(LS, LOW);
     enableInterrupt(B1, wakeup, CHANGE);
+    enableInterrupt(B2, wakeup, CHANGE);
+    enableInterrupt(B3, wakeup, CHANGE);
+    enableInterrupt(B4, wakeup, CHANGE);
     LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
     disableInterrupt(B1);
     active = false;
