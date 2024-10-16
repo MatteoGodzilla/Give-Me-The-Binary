@@ -44,9 +44,7 @@ void loop() {
       /*Game::loopAction();*/
       break;
     case GameOver:
-      /*start GameOver.c*/;
-      /*Decide when and how call GameOver::setup()*/
-      /*GameOver::loopAction();*/
+      GameOverNP::loopAction(/*punteggio dalla fase Game*/);
       break;
     case Sleep:
       break;
@@ -69,12 +67,13 @@ void changeState() {
       }
       break;
     case Game:
-      if (GameNP::isActive()) {
+      if (!GameNP::isActive()) {
         currentState = GameOver;
+        GameOverNP::setup();
       }
       break;
     case GameOver:
-      if (GameOverNP::isActive()) {
+      if (!GameOverNP::isActive()) {
         currentState = Attract;
         AttractNP::setup();
       }
