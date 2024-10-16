@@ -10,6 +10,6 @@
 void setupAttract();
 void loopAttract();
 bool isAttractActive();
-enum State getNextState();
+enum State getAttractNextState();
 
 #endif

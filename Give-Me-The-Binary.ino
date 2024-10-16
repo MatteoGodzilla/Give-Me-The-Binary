@@ -31,10 +31,10 @@ void loop() {
     case Attract:
       loopAttract();
       break;
-    case Game: 
+    case Game:
       /*start Game.c*/;
       break;
-    case GameOver: 
+    case GameOver:
       /*start GameOver.c*/;
       break;
     case Sleep:
@@ -48,9 +48,9 @@ void changeState() {
   switch (currentState) {
     case Attract:
       if (!isAttractActive()) {
-        if (getNextState() == Game) {
+        if (getAttractNextState() == Game) {
           currentState = Game;
-        } else if (getNextState() == Sleep) {
+        } else if (getAttractNextState() == Sleep) {
           currentState = Sleep;
           setupSleep();
         }

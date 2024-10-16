@@ -21,13 +21,13 @@ void goSleep() {
 
 void setupAttract() {
   active = true;
-  
+
   Timer1.initialize(10 * 1000 * 1000);  //10 sec
   Timer1.attachInterrupt(goSleep);
   Serial.println("[STATUS: Attract]");
 
   cooldownStart = millis();
-  
+
   Serial.println(cooldownStart);
 }
 
@@ -50,6 +50,6 @@ bool isAttractActive() {
   return active;
 }
 
-enum State getNextState() {
+enum State getAttractNextState() {
   return next;
 }

@@ -17,6 +17,9 @@ void setupSleep() {
     enableInterrupt(B4, wakeup, CHANGE);
     LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
     disableInterrupt(B1);
+    disableInterrupt(B2);
+    disableInterrupt(B3);
+    disableInterrupt(B4);
     active = false;
 }
 
