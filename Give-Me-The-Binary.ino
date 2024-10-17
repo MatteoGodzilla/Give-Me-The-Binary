@@ -61,8 +61,8 @@ void changeState() {
           currentState = Game;
           GameNP::setup(AttractNP::getDifficulty(), &lcd);
         } else if (AttractNP::getNextState() == Sleep) {
-          // currentState = Sleep;
-          // SleepNP::setup();
+          currentState = Sleep;
+          SleepNP::setup(&lcd);
         }
       }
       break;

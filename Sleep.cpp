@@ -6,11 +6,15 @@ static bool active = false;
 
 static void wakeup(){}
 
-void SleepNP::setup() {
+void SleepNP::setup(LiquidCrystal_I2C *lcd) {
+    active = true;
     Serial.println("[STATUS: Sleep]");
     Serial.flush();
-    active = true;
     digitalWrite(LS, LOW);
+    
+    lcd->clear();
+    lcd->noBacklight();
+    
     enableInterrupt(B1, wakeup, CHANGE);
     enableInterrupt(B2, wakeup, CHANGE);
     enableInterrupt(B3, wakeup, CHANGE);
@@ -20,6 +24,9 @@ void SleepNP::setup() {
     disableInterrupt(B2);
     disableInterrupt(B3);
     disableInterrupt(B4);
+
+    lcd->backlight();
+
     active = false;
 }
 
