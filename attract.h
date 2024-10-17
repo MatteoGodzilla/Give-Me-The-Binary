@@ -1,7 +1,7 @@
 #pragma once
-#include <stdbool.h>
 #include <Arduino.h>
 #include <TimerOne.h>
+#include <LiquidCrystal_I2C.h>
 #include "state.h"
 #include "pins.h"
 

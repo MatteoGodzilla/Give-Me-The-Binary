@@ -1,5 +1,4 @@
 #pragma once
-#include <stdbool.h>
 #include <Arduino.h>
 #include <EnableInterrupt.h>
 #include "LowPower.h"

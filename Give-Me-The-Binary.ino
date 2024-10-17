@@ -27,25 +27,24 @@ void setup() {
   pinMode(L2, OUTPUT); // Green Led (L2)
   pinMode(L3, OUTPUT); // Green Led (L3)
   pinMode(L4, OUTPUT); // Green Led (L4)
-  pinMode(B1, INPUT); // B1
-  pinMode(B2, INPUT); // B2
-  pinMode(B3, INPUT); // B3
-  pinMode(B4, INPUT); // B4
+  pinMode(B1, INPUT); // Button 1
+  pinMode(B2, INPUT); // Button 2
+  pinMode(B3, INPUT); // Button 3
+  pinMode(B4, INPUT); // Button 4
   Serial.begin(9600);
   AttractNP::setup();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   switch (currentState) {
     case Attract:
-      AttractNP::loopAction(LiquidCrystal_I2C *lcd);
+      AttractNP::loopAction(&lcd);
       break;
     case Game:
-      Game::loopAction(LiquidCrystal_I2C *lcd);
+      GameNP::loopAction(&lcd);
       break;
     case GameOver:
-      GameOverNP::loopAction(/*punteggio dalla fase Game*/);
+      GameOverNP::loopAction(0,&lcd);
       break;
     case Sleep:
       break;
@@ -62,8 +61,8 @@ void changeState() {
           currentState = Game;
           GameNP::setup();
         } else if (AttractNP::getNextState() == Sleep) {
-          currentState = Sleep;
-          SleepNP::setup();
+          // currentState = Sleep;
+          // SleepNP::setup();
         }
       }
       break;

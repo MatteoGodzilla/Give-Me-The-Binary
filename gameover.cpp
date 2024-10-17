@@ -1,10 +1,10 @@
-#include "Arduino.h"
 #include "gameover.h"
 
 static bool active;
 
 void GameOverNP::setup() {
   active = true;
+  Serial.println("[STATUS: GameOver]");
 }
 
 void GameOverNP::loopAction(int points, LiquidCrystal_I2C *lcd) {
