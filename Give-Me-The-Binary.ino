@@ -33,6 +33,7 @@ void setup() {
   pinMode(B4, INPUT); // Button 4
   Serial.begin(9600);
   AttractNP::setup();
+  randomSeed(analogRead(A1)); //A1 is not connected to anything, this is on purpose
 }
 
 void loop() {

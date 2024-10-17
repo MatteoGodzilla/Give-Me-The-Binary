@@ -5,29 +5,19 @@ static enum State next;
 static int difficulty;
 
 static unsigned long cooldownStart;
-#define COOLDOWN_DURATION 2000
+#define COOLDOWN_DURATION 1000
 
 #define FLASH_HALF_PERIOD 500
 static unsigned long cycleStart;
 
+#define TIME_TO_SLEEP 10000
+static unsigned long sleepTimeoutStart;
+
 static bool shouldWaitMore;
 
 static void goSleep() {
-  // Serial.print("called ");
-  // Serial.println(millis());
-
-  if(shouldWaitMore){
-    shouldWaitMore = false;
-    // Serial.println("5 secondi sono passati, alla prossima si dorme");
-  } else {
-    active = false;
-    next = Sleep;
-    // Serial.println("Passato alla fase sleep");
-    Timer1.detachInterrupt();
-
-    // Serial.println(millis());
-    Serial.flush();
-  }
+  active = false;
+  next = Sleep;
 }
 
 static void printLCD(LiquidCrystal_I2C *lcd){
@@ -44,15 +34,11 @@ void AttractNP::setup() {
   active = true;
   shouldWaitMore = true;
   
-  Timer1.initialize(5 * 1000 * 1000);  //5 second timer, should trigger "goSleep" twice
-  Timer1.attachInterrupt(goSleep);
-
   Serial.println("[STATUS: Attract]");
 
   cooldownStart = millis();
   cycleStart = millis();
-
-  // Serial.println(cooldownStart);
+  sleepTimeoutStart = millis();
 }
 
 static void calculateDifficulty(){
@@ -75,13 +61,17 @@ void AttractNP::loopAction(LiquidCrystal_I2C *lcd) {
     cycleStart = now;
   }
 
+  unsigned long sleepDelta = now - sleepTimeoutStart;
+  if(sleepDelta > TIME_TO_SLEEP){
+    goSleep();
+  }
+
   calculateDifficulty();
   printLCD(lcd);
 
   if (millis() - cooldownStart > COOLDOWN_DURATION && digitalRead(B1) == HIGH) {
     active = false;
     next = Game;
-    Timer1.detachInterrupt();
   }
   delay(10);
 }

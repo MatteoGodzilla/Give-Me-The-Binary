@@ -1,6 +1,5 @@
 #pragma once
 #include <Arduino.h>
-#include <TimerOne.h>
 #include <LiquidCrystal_I2C.h>
 #include "state.h"
 #include "pins.h"
