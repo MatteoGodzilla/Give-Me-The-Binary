@@ -31,7 +31,7 @@ void AttractNP::setup() {
   Serial.println(cooldownStart);
 }
 
-void AttractNP::loopAction() {
+void AttractNP::loopAction(LiquidCrystal_I2C *lcd) {
   analogWrite(LS, currIntensity);
   currIntensity += fadeAmount;
   if (currIntensity == 0 || currIntensity == 255) {

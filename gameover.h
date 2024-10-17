@@ -4,6 +4,6 @@
 
 namespace GameOverNP {
   void setup();
-  void loopAction(/*punteggio dalla fase Game*/);
+  void loopAction(int points, LiquidCrystal_I2C *lcd);
   bool isActive();
 }

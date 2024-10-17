@@ -15,10 +15,13 @@ Authors: Carletti Lorenzo, Catena Matteo, Dall'Ara Lorenzo
 #include "pins.h"
 
 enum State currentState;
+LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 20, 4);
 
 void setup() {
-  currentState = Attract;
   // put your setup code here, to run once:
+  currentState = Attract;
+  lcd.init();
+  lcd.backlight();
   pinMode(LS, OUTPUT); // Red Led (Ls)
   pinMode(L1, OUTPUT); // Green Led (L1)
   pinMode(L2, OUTPUT); // Green Led (L2)
@@ -36,12 +39,10 @@ void loop() {
   // put your main code here, to run repeatedly:
   switch (currentState) {
     case Attract:
-      AttractNP::loopAction();
+      AttractNP::loopAction(LiquidCrystal_I2C *lcd);
       break;
     case Game:
-      /*start Game.c*/;
-      /*Decide when and how call Game::setup()*/
-      /*Game::loopAction();*/
+      Game::loopAction(LiquidCrystal_I2C *lcd);
       break;
     case GameOver:
       GameOverNP::loopAction(/*punteggio dalla fase Game*/);
@@ -59,7 +60,7 @@ void changeState() {
       if (!AttractNP::isActive()) {
         if (AttractNP::getNextState() == Game) {
           currentState = Game;
-          /*Missing call to GameNP::setup() ???*/
+          GameNP::setup();
         } else if (AttractNP::getNextState() == Sleep) {
           currentState = Sleep;
           SleepNP::setup();

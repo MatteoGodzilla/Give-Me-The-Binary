@@ -7,7 +7,7 @@
 
 namespace AttractNP {
   void setup();
-  void loopAction();
+  void loopAction(LiquidCrystal_I2C *lcd);
   bool isActive();
   enum State getNextState();
 }
