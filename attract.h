@@ -10,4 +10,5 @@ namespace AttractNP {
   void loopAction(LiquidCrystal_I2C *lcd);
   bool isActive();
   enum State getNextState();
+  int getDifficulty();
 }

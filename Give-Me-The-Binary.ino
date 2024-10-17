@@ -44,7 +44,7 @@ void loop() {
       GameNP::loopAction(&lcd);
       break;
     case GameOver:
-      GameOverNP::loopAction(0,&lcd);
+      GameOverNP::loopAction(GameNP::getScore(), &lcd);
       break;
     case Sleep:
       break;
@@ -59,7 +59,7 @@ void changeState() {
       if (!AttractNP::isActive()) {
         if (AttractNP::getNextState() == Game) {
           currentState = Game;
-          GameNP::setup();
+          GameNP::setup(AttractNP::getDifficulty(), &lcd);
         } else if (AttractNP::getNextState() == Sleep) {
           // currentState = Sleep;
           // SleepNP::setup();

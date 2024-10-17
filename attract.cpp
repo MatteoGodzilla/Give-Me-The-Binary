@@ -2,7 +2,7 @@
 
 static bool active;
 static enum State next;
-static int fadeAmount = 5;
+static int difficulty;
 
 static unsigned long cooldownStart;
 #define COOLDOWN_DURATION 2000
@@ -35,6 +35,9 @@ static void printLCD(LiquidCrystal_I2C *lcd){
   lcd->print("Welcome to GMB!");
   lcd->setCursor(0, 1);
   lcd->print("Press B1 to Start");
+  lcd->setCursor(0, 2);
+  lcd->print("Difficulty:");
+  lcd->print(difficulty);
 }
 
 void AttractNP::setup() {
@@ -52,6 +55,11 @@ void AttractNP::setup() {
   // Serial.println(cooldownStart);
 }
 
+static void calculateDifficulty(){
+  int value = analogRead(POT) >> 8;
+  difficulty = value + 1;
+}
+
 void AttractNP::loopAction(LiquidCrystal_I2C *lcd) {
   unsigned long now = millis();
   unsigned long cycleDelta = now - cycleStart;
@@ -67,6 +75,7 @@ void AttractNP::loopAction(LiquidCrystal_I2C *lcd) {
     cycleStart = now;
   }
 
+  calculateDifficulty();
   printLCD(lcd);
 
   if (millis() - cooldownStart > COOLDOWN_DURATION && digitalRead(B1) == HIGH) {
@@ -83,4 +92,8 @@ bool AttractNP::isActive() {
 
 enum State AttractNP::getNextState() {
   return next;
+}
+
+int AttractNP::getDifficulty(){
+  return difficulty;
 }
