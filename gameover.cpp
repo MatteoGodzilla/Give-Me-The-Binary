@@ -4,6 +4,10 @@ static bool active;
 
 void GameOverNP::setup() {
   active = true;
+  digitalWrite(L1, LOW);
+  digitalWrite(L2, LOW);
+  digitalWrite(L3, LOW);
+  digitalWrite(L4, LOW);
   Serial.println("[STATUS: GameOver]");
 }
 
@@ -16,9 +20,10 @@ void GameOverNP::loopAction(int points, LiquidCrystal_I2C *lcd) {
   //Display on LCD the message "Game Over - Final Score XXX" for 10 seconds
   lcd->clear();
   lcd->setCursor(0, 0);
-  lcd->print("Game Over");
+  lcd->print("Game Over -");
   lcd->setCursor(0, 1);
-  lcd->print("Final Score " + points);
+  lcd->print("Final Score ");
+  lcd->print(points);
   delay(10000); //10 sec
   lcd->clear();
 

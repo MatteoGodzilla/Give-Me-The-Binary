@@ -30,7 +30,7 @@ void GameNP::setup(int difficulty, LiquidCrystal_I2C *lcd){
   active = true;
   Serial.println("[STATUS: Game]");
   Serial.println(difficulty);
-  
+
   //1 = minimum difficulty, 4 = maximum difficulty
   switch(difficulty){
     default:
@@ -59,7 +59,7 @@ void GameNP::setup(int difficulty, LiquidCrystal_I2C *lcd){
 
   score = 0;
   startRound();
-  roundPeriod = FIRST_ROUND_PERIOD; //10 seconds
+  roundPeriod = FIRST_ROUND_PERIOD;
 }
 
 static void goodJob(LiquidCrystal_I2C *lcd){
@@ -118,7 +118,7 @@ static void checkGuess(LiquidCrystal_I2C *lcd){
 
   if(digitalRead(B4) == HIGH){
     guess += 1;
-  } 
+  }
 
   if(guess == toGuess){
     score += roundPoints;
