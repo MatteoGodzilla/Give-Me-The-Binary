@@ -46,9 +46,13 @@ static void calculateDifficulty(){
   int currentPot = analogRead(POT);
   int value = currentPot >> 8;
   difficulty = value + 1;
-  if (currentPot != lastPotValue) {
-    lastPotValue = currentPot;
+  //The system doesn't go to sleep when the user is changing the difficulty
+  //The check is done at a higher resolution
+  int potCheck = currentPot >> 4;
+  if (potCheck != lastPotValue) {
+    lastPotValue = potCheck;
     sleepTimeoutStart = millis();
+    Serial.println("Reset Timeout");
   }
 }
 
