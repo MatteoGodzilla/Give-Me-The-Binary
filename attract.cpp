@@ -3,6 +3,7 @@
 static bool active;
 static enum State next;
 static int difficulty;
+static int lastPotValue = 0;
 
 static unsigned long cooldownStart;
 #define COOLDOWN_DURATION 1000
@@ -33,7 +34,7 @@ static void printLCD(LiquidCrystal_I2C *lcd){
 void AttractNP::setup() {
   active = true;
   shouldWaitMore = true;
-  
+
   Serial.println("[STATUS: Attract]");
 
   cooldownStart = millis();
@@ -42,8 +43,13 @@ void AttractNP::setup() {
 }
 
 static void calculateDifficulty(){
-  int value = analogRead(POT) >> 8;
+  int currentPot = analogRead(POT);
+  int value = currentPot >> 8;
   difficulty = value + 1;
+  if (currentPot != lastPotValue) {
+    lastPotValue = currentPot;
+    sleepTimeoutStart = millis();
+  }
 }
 
 void AttractNP::loopAction(LiquidCrystal_I2C *lcd) {
